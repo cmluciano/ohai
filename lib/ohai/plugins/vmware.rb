@@ -48,6 +48,7 @@ Ohai.plugin(:Vmware) do
         # Iterate through each parameter supported by the "vnware-toolbox-cmd stat" command, assign value
         # to attribute "vmware[:<parameter>]"
         [ "hosttime", "speed", "sessionid", "balloon", "swap", "memlimit", "memres", "cpures", "cpulimit" ].each do |param|
+          p "#{vmtools_path} stat #{param}"
           vmware[:"#{param}"] = from_cmd("#{vmtools_path} stat #{param}")
           if vmware[:"#{param}"] =~ /UpdateInfo failed/
             vmware[:"#{param}"] = nil
